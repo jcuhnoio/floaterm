@@ -100,7 +100,9 @@ M.switch_buf = function(buf)
     end
   end
 
-  vim.cmd.startinsert()
+  if state.config.autoinsert then
+    vim.cmd.startinsert()
+  end
 end
 
 M.get_term_by_key = function(tocompare, name)

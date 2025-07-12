@@ -6,6 +6,7 @@ local M = {
 
   config = {
     border = false,
+    autoinsert = true,
     size = { h = 60, w = 70 },
 
     -- { row , col } or fn() returning the table
