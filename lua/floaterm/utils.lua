@@ -84,6 +84,13 @@ M.switch_buf = function(buf)
 
     require("volt").mappings {
       bufs = { state.buf, state.sidebuf, state.barbuf },
+      wins = { state.win, state.barwin, state.sidewin },
+      after_softclose = function()
+        M.close_timers()
+        state.volt_set = false
+        api.nvim_set_current_win(state.prev_win_focused)
+      end,
+
       after_close = function()
         M.close_timers()
         state.volt_set = false

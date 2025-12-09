@@ -2,7 +2,7 @@ local M = {
   ns = vim.api.nvim_create_namespace "Floaterm",
   terminals = nil,
   bar_redraw_timeout = 10000,
-  prev_win_focussed = 0,
+  prev_win_focused = 0,
 
   config = {
     border = false,
