@@ -82,30 +82,30 @@ M.switch_buf = function(buf)
       require("floaterm.api").cycle_term_bufs "prev"
     end, { buffer = state.buf })
 
-    require("volt").mappings {
-      bufs = { state.buf, state.sidebuf, state.barbuf },
-      wins = { state.win, state.barwin, state.sidewin },
-      after_softclose = function()
-        M.close_timers()
-        state.volt_set = false
-        api.nvim_set_current_win(state.prev_win_focused)
-      end,
-
-      after_close = function()
-        M.close_timers()
-        state.volt_set = false
-        state.terminals = nil
-        state.buf = nil
-        state.sidebuf = nil
-        state.barbuf = nil
-        api.nvim_del_augroup_by_name "FloatermAu"
-      end,
-    }
-
     if state.config.mappings.term then
       state.config.mappings.term(state.buf)
     end
   end
+
+  require("volt").mappings {
+    bufs = { state.buf, state.sidebuf, state.barbuf },
+    wins = { state.win, state.barwin, state.sidewin },
+    after_softclose = function()
+      M.close_timers()
+      state.volt_set = false
+      api.nvim_set_current_win(state.prev_win_focused)
+    end,
+
+    after_close = function()
+      M.close_timers()
+      state.volt_set = false
+      state.terminals = nil
+      state.buf = nil
+      state.sidebuf = nil
+      state.barbuf = nil
+      api.nvim_del_augroup_by_name "FloatermAu"
+    end,
+  }
 
   if state.config.autoinsert then
     vim.cmd.startinsert()
